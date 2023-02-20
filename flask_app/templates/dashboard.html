@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'style.css') }}" />
+  </head>
+  <body>
+    <nav>
+      <h1>Welcome {{ user.first_name }}!</h1><a href="/logout" class="btn">Logout</a>
+    </nav>
+    <div>
+      <h2>All Jobs</h2>
+      <table class="table-bordered">
+        <thead>
+          <tr>
+            <th>Job</th>
+            <th>Location</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for job in all_jobs %}
+            <tr>
+              <td>{{ job.title }}</td>
+              <td>{{ job.location }}</td>
+              <td>
+                <a href="/job/{{ job.id }}" class="btn">View</a>
+                {% if job.user.id == session.user_id %}
+                  <a href="/job/edit/{{ job.id }}" class="btn">Edit</a>
+                  <a href="/job/remove/{{ job.id }}" class="btn">Delete</a>
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h2>My Jobs</h2>
+      <table class="table-bordered">
+        <thead>
+          <tr>
+            <th>Job</th>
+            <th>Location</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for job in my_jobs %}
+            <tr>
+              <td>{{ job.title }}</td>
+              <td>{{ job.location }}</td>
+              <td>
+                <a href="/job/{{ job.id }}" class="btn">View</a>
+                <a href="/job/remove/{{ job.id }}" class="btn">Done</a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <a href="/job/new" class="btn">Add new job</a>
+  </body>
+</html>

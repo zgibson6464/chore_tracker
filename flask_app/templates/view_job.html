@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Job</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+</head>
+<body>
+    <nav>
+        <a href="/dashboard" class="btn">Back</a>
+        <a href="/logout" class="btn">Logout</a>
+    </nav>
+    <h1>{{job.title}}</h1>
+    <h2 class="label">Description:</h2>
+    <p>{{job.description}}</p>
+    <h2 class="label">Location: {{job.location}}</h2>
+        <h3>Posted by: {{user_job.user_job.first_name}} {{user_job.user_job.last_name}}</h3>
+    <form action="/job/new/add" method="post">
+        <input type="hidden" name="title" value="{{job.title}}">
+        <input type="hidden" name="description" value="{{job.description}}">
+        <input type="hidden" name="location" value="{{job.location}}">
+        <input type="submit" value="Add to my jobs" class="btn">
+    </form>
+</body>
+</html>

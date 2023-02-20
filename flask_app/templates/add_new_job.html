@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a new Job</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+</head>
+<body>
+    <nav>
+        <a href="/dashboard" class="btn">Back</a>
+        <a href="/logout" class="btn">Logout</a>
+    </nav>
+    <h1>Add a New Job</h1>
+    <form action="/job/new/add" method="post">
+        {% with messages = get_flashed_messages() %}     
+            {% if messages %}                            
+                {% for message in messages %}            
+                    <p>{{message}}</p>                   
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <label>Title:
+            <br><input type="text" name="title">
+        </label>
+        <label>Description:
+            <br><textarea name="description" cols="30" rows="20"></textarea>
+        </label>
+        <label>Location:
+            <br><input type="text" name="location">
+        </label>
+        <input type="submit" value="Submit" class="btn">
+    </form>
+</body>
+</html>

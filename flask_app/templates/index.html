@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'style.css') }}" />
+  </head>
+  <body>
+    <nav>
+      <h1 class="page-header">Welcome to Chore Tracker</h1>
+    </nav>
+    <div class="container">
+      <div class="register">
+        <h2>Register</h2>
+        {% with messages = get_flashed_messages() %}
+          <!-- declare a variable called messages -->
+          {% if messages %}
+            <!-- check if there are any messages -->
+            {% for message in messages %}
+              <!-- loop through the messages -->
+              <p>{{ message }}</p> <!-- display each message in a paragraph tag -->
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        <form action="/register/user" method="post" name="register">
+          <label class="label input-block-level">First Name:<input type="text" name="first_name" /></label>
+          <label class="label">Last Name:<input type="text" name="last_name" /></label>
+          <label class="label">Email:<input type="text" name="email" /></label>
+          <label class="label">Password:<input type="password" name="password" /></label>
+          <label class="label">Confirm Password:<input type="password" name="confirm_password" /></label>
+          <input type="submit" value="Register" class="btn" />
+        </form>
+      </div>
+      <div class="login">
+        <h2>Login</h2>
+        <form action="/login" method="post" name="login">
+          <label class="label">Email:<input type="text" name="email" /></label>
+          <label class="label">Password:<input type="password" name="password" /></label>
+          <input type="submit" value="Login" class="btn" />
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
